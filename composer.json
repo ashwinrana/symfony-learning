@@ -13,6 +13,7 @@
         "symfony/framework-bundle": "3.4.*",
         "symfony/maker-bundle": "^1.12",
         "symfony/orm-pack": "^1.0",
+        "symfony/security-bundle": "3.4.*",
         "symfony/twig-bundle": "3.4.*",
         "symfony/validator": "3.4.*",
         "symfony/var-dumper": "3.4.*",

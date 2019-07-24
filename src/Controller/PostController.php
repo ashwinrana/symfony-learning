@@ -49,10 +49,9 @@ class PostController extends Controller
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
         if( $form->isSubmitted() && $form->isValid() ){
-            dump($request);
-            die();
+
         }
-        return $this->render('view/admin/pages/post/edit.html.twig', ['post' => $post]);
+        return $this->render('view/admin/pages/post/edit.html.twig', [ 'post' => $post ]);
     }
 
     public function delete($id, PostRepository $postRepository)
