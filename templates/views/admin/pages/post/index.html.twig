@@ -28,6 +28,7 @@
 
                                                         <div class="box-tools">
                                                                 <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
+                                                                        <a href="{{ path('post.create') }}"><i class="fa fa-plus"></i> Create</a>
                                                                         <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
 
                                                                         <div class="input-group-btn">
@@ -56,14 +57,14 @@
                                                                                         <td>{{  post.id }}</td>
                                                                                         <td>{{ post.title }}</td>
                                                                                         <td>Admin</td>
-                                                                                        <td>{{ post.getCreatedAt }}</td>
+                                                                                        <td>{{ post.getCreatedAt|date("m/d/Y") }}</td>
                                                                                         <td>{% if post.status == 1 %}<span class="label label-success">Approved {% else %}<span class="label label-danger">Not Approved{% endif %}</span></td>
                                                                                         <td>{{ post.description }}</td>
                                                                                         {% if post.image %}
                                                                                         <td><img src="{{ asset('/uploads/' ~ post.image) }}" alt="{{ post.title }}-image" style="height: 125px; width: 150px;" ></td>
                                                                                         {% endif %}
-                                                                                        <td><a href="{{ path('post.show', { id: post.id}) }}"><button class="btn btn-sm btn-info"><i class="fa fa-edit"></i>Edit</button></a> |
-                                                                                                <a href="{{ path('post.delete', { id: post.id}) }}"><button class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i>Delete</button></a></td>
+                                                                                        <td><a href="{{ path('post.show', { id: post.id}) }}"><button class="btn btn-sm btn-info"><i class="fa fa-eye"></i> Show</button></a> |
+                                                                                                <a href="{{ path('post.delete', { id: post.id}) }}"><button class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Delete</button></a></td>
                                                                                 </tr>
                                                                         {% endfor %}
                                                                 {% endif %}
