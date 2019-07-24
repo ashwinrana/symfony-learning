@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Library\FileUploader;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,7 +17,7 @@ class PostController extends Controller
         return $this->render('views/admin/pages/post/index.html.twig', [ 'posts' => $posts ]);
     }
 
-    public function create(Request $request)
+    public function create(Request $request, FileUploader $fileUploader)
     {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
@@ -25,8 +26,7 @@ class PostController extends Controller
             $entity_manager = $this->getDoctrine()->getManager();
             $file = $request->files->get('post')['attachment'];
             if( $file ) {
-                $name = time().'-'. uniqid() . '.'. $file->guessClientExtension();
-                $file->move( $this->getParameter('uploads_dir'), $name );
+                $name = $fileUploader->upload($file);
                 $post->setImage( $name );
             }
             $entity_manager->persist($post);
