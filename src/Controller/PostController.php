@@ -23,6 +23,12 @@ class PostController extends Controller
         $form->handleRequest($request);
         if( $form->isSubmitted() && $form->isValid() ){
             $entity_manager = $this->getDoctrine()->getManager();
+            $file = $request->files->get('post')['attachment'];
+            if( $file ) {
+                $name = time().'-'. uniqid() . '.'. $file->guessClientExtension();
+                $file->move( $this->getParameter('uploads_dir'), $name );
+                $post->setImage( $name );
+            }
             $entity_manager->persist($post);
             $entity_manager->flush();
             $this->addFlash('success', 'New Post Has been created successfully' );

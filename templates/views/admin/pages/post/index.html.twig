@@ -47,6 +47,7 @@
                                                                         <th>Date</th>
                                                                         <th>Status</th>
                                                                         <th>Description</th>
+                                                                        <th>Image</th>
                                                                         <th>Actions</th>
                                                                 </tr>
                                                                 {% if posts %}
@@ -58,6 +59,9 @@
                                                                                         <td>{{ post.getCreatedAt }}</td>
                                                                                         <td>{% if post.status == 1 %}<span class="label label-success">Approved {% else %}<span class="label label-danger">Not Approved{% endif %}</span></td>
                                                                                         <td>{{ post.description }}</td>
+                                                                                        {% if post.image %}
+                                                                                        <td><img src="{{ asset('/uploads/' ~ post.image) }}" alt="{{ post.title }}-image" style="height: 125px; width: 150px;" ></td>
+                                                                                        {% endif %}
                                                                                         <td><a href="{{ path('post.show', { id: post.id}) }}"><button class="btn btn-sm btn-info"><i class="fa fa-edit"></i>Edit</button></a> |
                                                                                                 <a href="{{ path('post.delete', { id: post.id}) }}"><button class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i>Delete</button></a></td>
                                                                                 </tr>
