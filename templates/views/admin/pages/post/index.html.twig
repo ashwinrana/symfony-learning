@@ -63,8 +63,7 @@
                                                                                         {% if post.image %}
                                                                                         <td><img src="{{ asset('/uploads/' ~ post.image) }}" alt="{{ post.title }}-image" style="height: 125px; width: 150px;" ></td>
                                                                                         {% endif %}
-                                                                                        <td><a href="{{ path('post.show', { id: post.id}) }}"><button class="btn btn-sm btn-info"><i class="fa fa-eye"></i> Show</button></a> |
-                                                                                                <a href="{{ path('post.delete', { id: post.id}) }}"><button class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Delete</button></a></td>
+                                                                                        <td><a href="{{ path('post.edit', { id: post.id}) }}"><button class="btn btn-sm btn-info"><i class="fa fa-edit"></i> Edit</button></a> | <a href="{{ path('post.show', { id: post.id}) }}"><button class="btn btn-sm btn-info"><i class="fa fa-eye"></i> Show</button></a> |<a href="{{ path('post.delete', { id: post.id}) }}"><button class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Delete</button></a></td>
                                                                                 </tr>
                                                                         {% endfor %}
                                                                 {% endif %}

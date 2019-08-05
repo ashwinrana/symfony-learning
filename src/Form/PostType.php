@@ -36,7 +36,9 @@ class PostType extends AbstractType
                 ]
             ])
             ->add('attachment', FileType::class, [
-                'mapped' => false
+                'mapped' => false,
+                'required' => false
+
             ])
             ->add('Submit', SubmitType::class, [
                 'attr' => [

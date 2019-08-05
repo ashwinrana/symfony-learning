@@ -24,3 +24,7 @@ post.show:
 post.delete:
   path: /admin/post/delete/{id}
   defaults: { _controller: 'App\Controller\PostController::delete'}
+
+post.edit:
+  path: /admin/post/edit/{id}
+  defaults: { _controller: 'App\Controller\PostController::edit'}

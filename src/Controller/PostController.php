@@ -46,7 +46,7 @@ class PostController extends Controller
         return $this->render('views/admin/pages/post/show.html.twig', [ 'post' => $post ]);
     }
 
-    public function edit($id, PostRepository $postRepository, Request $request)
+    public function edit($id, PostRepository $postRepository, Request $request, FileUploader $fileUploader)
     {
         $post = $postRepository->find($id);
         if (!$post) {
@@ -55,9 +55,18 @@ class PostController extends Controller
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
         if( $form->isSubmitted() && $form->isValid() ){
-
+            $entity_manager = $this->getDoctrine()->getManager();
+            $file = $request->files->get('post')['attachment'];
+            if( $file ) {
+                $name = $fileUploader->upload($file);
+                $post->setImage( $name );
+            }
+            $entity_manager->persist($post);
+            $entity_manager->flush();
+            $this->addFlash('success', 'New Post Has been created successfully' );
+            return $this->redirect( $this->generateUrl( 'post.index' ) );
         }
-        return $this->render('view/admin/pages/post/edit.html.twig', [ 'post' => $post ]);
+        return $this->render('views/admin/pages/post/edit.html.twig', [ 'form' => $form->createView() ]);
     }
 
     public function delete($id, PostRepository $postRepository)
